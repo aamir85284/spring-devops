@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="newproducts")
+@Table(name = "newproducts")
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,9 +15,11 @@ public class Product {
 	private String productName;
 	private Double price;
 	private String description;
+
 	public Product() {
-		// TODO Auto-generated constructor stub
+
 	}
+
 	/**
 	 * @param productName
 	 * @param price
@@ -28,31 +30,37 @@ public class Product {
 		this.price = price;
 		this.description = description;
 	}
+
 	public Integer getProductId() {
 		return productId;
 	}
+
 	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
+
 	public String getProductName() {
 		return productName;
 	}
+
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
+
 	public Double getPrice() {
 		return price;
 	}
+
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
 
 }
