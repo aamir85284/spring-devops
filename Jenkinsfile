@@ -44,13 +44,25 @@ bat(/"${mvnHome}\bin\mvn" sonar:sonar/)
 }
 }
 
-stage('Push Docker image') {
+ 
+stage("Docker build") {
 steps {
-echo "-=- push Docker image -=-"
-withDockerRegistry([ credentialsId: "${ORG_NAME}-docker-hub", url: "" ]) {
-sh "docker push ${ORG_NAME}/${APP_NAME}:${APP_VERSION}"
-sh "docker tag ${ORG_NAME}/${APP_NAME}:${APP_VERSION} ${ORG_NAME}/${APP_NAME}:latest"
+sh "docker build -t aamir85284/spring-devops:${BUILD_TIMESTAMP} ."
 }
+}
+
+stage("Docker login") {
+steps {
+withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '',
+usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+sh "docker login --username $USERNAME --password $PASSWORD"
+}
+}
+}
+
+stage("Docker push") {
+steps {
+sh "docker push aamir85284/spring-devops:${BUILD_TIMESTAMP}"
 }
 }
 }
